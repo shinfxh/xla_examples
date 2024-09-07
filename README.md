@@ -11,7 +11,12 @@ The following instructions apply for the `multitpu` example
 
 ```bash
 cd multitpu
+```
+First create a `conda` environment, since we are going to install some versions of `torch_xla` that might conflict with local dependencies.
+
+```bash
 conda create -n multitpu python=3.10
+conda activate multitpu
 conda install pip
 pip install torch~=2.4.0 torch_xla[tpu]~=2.4.0 -f https://storage.googleapis.com/libtpu-releases/index.html
 ```
