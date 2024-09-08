@@ -28,7 +28,16 @@ python multitpu.py 50 10
 ```
 
 
-To check stats such as TPU utilization, we use profiling as in https://cloud.google.com/tpu/docs/pytorch-xla-performance-profiling-tpu-vm
+To check stats such as TPU utilization, there are a few ways to do it.
+
+The easy solution: 
+
+`pip install git+https://github.com/google/cloud-accelerator-diagnostics/#subdirectory=tpu_info`
+
+then run `tpu-info` just like `nvidia-smi`
+
+The long solution:
+We use profiling as in https://cloud.google.com/tpu/docs/pytorch-xla-performance-profiling-tpu-vm
 
 First ssh into the TPU-VM with port-forwarding by running: 
 
