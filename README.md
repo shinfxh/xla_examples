@@ -49,7 +49,10 @@ Then open another shell and run
 gcloud compute tpus tpu-vm ssh ${TPU_NAME} \
 --zone us-central2-b \
 --worker=all \
---command="python3 capture_profile.py --service_addr "localhost:9012" --logdir ./profiles/ --duration_ms 2000"
+--command="
+cd $DIR
+python3 capture_profile.py --service_addr "localhost:9012" --logdir ./profiles/ --duration_ms 2000
+"
 ```
 
 Currently epoch 0 is used as the initialization for the JIT compilation, so probably a good idea to run the above command after epoch 0 has passed. 
