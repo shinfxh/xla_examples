@@ -52,7 +52,7 @@ gcloud compute tpus tpu-vm ssh ${TPU_NAME} \
 --command="
 cd $DIR
 conda activate multitpu
-python3 capture_profile.py --service_addr "localhost:9012" --logdir ./profiles/ --duration_ms 2000
+python capture_profile.py --service_addr "localhost:9012" --logdir ./profiles/ --duration_ms 2000
 "
 ```
 
