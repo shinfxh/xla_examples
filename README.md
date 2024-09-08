@@ -18,7 +18,7 @@ First create a `conda` environment, since we are going to install some versions 
 conda create -n multitpu python=3.10
 conda activate multitpu
 conda install pip
-pip install torch~=2.4.0 torch_xla[tpu]~=2.4.0 -f https://storage.googleapis.com/libtpu-releases/index.html
+pip install numpy torch~=2.4.0 torch_xla[tpu]~=2.4.0 -f https://storage.googleapis.com/libtpu-releases/index.html
 ```
 
 This installs the necessary packages for running `torch_xla` on TPU. To run the example script: 
