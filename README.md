@@ -52,6 +52,8 @@ gcloud compute tpus tpu-vm ssh ${TPU_NAME} \
 --command="python3 capture_profile.py --service_addr "localhost:9012" --logdir ./profiles/ --duration_ms 2000"
 ```
 
+Currently epoch 0 is used as the initialization for the JIT compilation, so probably a good idea to run the above command after epoch 0 has passed. 
+
 Then open tensorboard with the forwarded port at the correct log directory
 ```bash
 tensorboard --logdir=./profiles/ --port=6006
@@ -60,5 +62,3 @@ tensorboard --logdir=./profiles/ --port=6006
 Open `localhost:6006` and a screen like this should appear 
 
 ![image](https://github.com/user-attachments/assets/4ee5ca5d-c69b-4252-9078-4bf0e7a600de)
-
-
