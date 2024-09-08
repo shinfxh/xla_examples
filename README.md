@@ -26,3 +26,39 @@ This installs the necessary packages for running `torch_xla` on TPU. To run the 
 ```bash
 python multitpu.py 50 10
 ```
+
+
+To check stats such as TPU utilization, we use profiling as in https://cloud.google.com/tpu/docs/pytorch-xla-performance-profiling-tpu-vm
+
+First ssh into the TPU-VM with port-forwarding by running: 
+
+```bash
+ssh vm_name -L 6006:localhost:6006
+```
+
+The idea here is to start the training loop and while the training loop is running, use `capture_profile.py` to trace the operations in the TPU cores. 
+
+In one shell, run (typically this will be a training loop that can be run in tmux)
+```bash
+python multitpu.py 50000 1000
+```
+
+Then open another shell and run 
+
+```bash
+gcloud compute tpus tpu-vm ssh ${TPU_NAME} \
+--zone us-central2-b \
+--worker=all \
+--command="python3 capture_profile.py --service_addr "localhost:9012" --logdir ./profiles/ --duration_ms 2000"
+```
+
+Then open tensorboard with the forwarded port at the correct log directory
+```bash
+tensorboard --logdir=./profiles/ --port=6006
+```
+
+Open `localhost:6006` and a screen like this should appear 
+
+![image](https://github.com/user-attachments/assets/4ee5ca5d-c69b-4252-9078-4bf0e7a600de)
+
+
